@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/02 11:51:39 by mmasstou          #+#    #+#             */
+/*   Updated: 2021/12/02 11:52:44 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/ft_printf.h"
 
+void	ft_print_char(t_printf *tab)
+{
+	char	a;
 
-void	ft_print_char(t_printf *tab)                       
-{                        
-    char a;   
-             
-    a = va_arg(tab->args, int);  //variadic function
-	tab->tl += write(1, &a, 1);  //print char
+	a = va_arg(tab->args, int);
+	tab->tl += write(1, &a, 1);
 }

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   shrap_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 11:32:24 by mmasstou          #+#    #+#             */
-/*   Updated: 2021/12/02 11:32:27 by mmasstou         ###   ########.fr       */
+/*   Created: 2021/12/02 11:22:35 by mmasstou          #+#    #+#             */
+/*   Updated: 2021/12/02 11:24:07 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-int	ft_putstr(char *str)
+void	shrap_flag(t_printf *tab, int spicefier)
 {
-	int	index;
+	unsigned int	x;
 
-	index = 0;
-	while (*str)
-		index += write(1, str++, 1);
-	return (index);
+	if (spicefier == 'x' || spicefier == 'X')
+	{
+		x = va_arg(tab->args, unsigned int);
+		if (x == 0)
+			tab->tl += write(1, "0", 1);
+		else
+		{
+			if (spicefier == 'x')
+				tab->tl += write(1, "0x", 2);
+			if (spicefier == 'X')
+				tab->tl += write(1, "0X", 2);
+			tab->tl += ft_puthex(x, spicefier);
+		}
+	}
+	tab->shrap = 0;
+	tab->_rep->shrap = 0;
+	tab->is_flag = 0;
 }

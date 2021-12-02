@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   space_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 11:32:24 by mmasstou          #+#    #+#             */
-/*   Updated: 2021/12/02 11:32:27 by mmasstou         ###   ########.fr       */
+/*   Created: 2021/12/02 11:24:25 by mmasstou          #+#    #+#             */
+/*   Updated: 2021/12/02 11:25:32 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-int	ft_putstr(char *str)
+void	space_flag(t_printf *tab, int spicefier)
 {
-	int	index;
+	int	nbr;
 
-	index = 0;
-	while (*str)
-		index += write(1, str++, 1);
-	return (index);
+	if (spicefier == 'd' || spicefier == 'i')
+	{
+		nbr = va_arg(tab->args, int);
+		if (nbr >= 0)
+			tab->tl += write(1, " ", 1);
+		tab->tl += ft_putnbr(nbr);
+	}
 }

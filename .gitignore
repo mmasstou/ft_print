@@ -2,3 +2,4 @@ printfTester
 a.*
 *.a
 *.o
+*/*.o
