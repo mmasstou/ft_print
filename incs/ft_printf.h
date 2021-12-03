@@ -25,6 +25,12 @@ typedef struct s_rep
 	int	perc;
 	int	space;
 	int	shrap;
+	int	zero;
+	int	dash;
+	int	pnt;
+	int	flags;
+	int	width;
+	int	precision;
 }	t_rep;
 
 typedef struct s_printf
@@ -36,7 +42,12 @@ typedef struct s_printf
 	int		perc;
 	int		space;
 	int		shrap;
+	int		zero;
+	int		dash;
+	int		pnt;
 	int		is_flag;
+	int		width;
+	int		precision;
 }	t_printf;
 // libft
 int			ft_atoi(const char *str);
@@ -49,6 +60,7 @@ int			ft_puthex(unsigned int num, int specifier);
 // srcs
 int			ft_printf(const char *format, ...);
 t_printf	*ft_initialise_tab(t_printf *tab);
+int 		is_integer_specifier(int c);
 int			is_specifier(int c);
 int			ft_eval_format(t_printf *tab, const char *format, int index);
 void		ft_specifier(t_printf *tab, const char *format, int index);
@@ -56,8 +68,11 @@ void		ft_print_char(t_printf *tab);
 void		ft_print_str(t_printf *tab);
 void		ft_print_adress(t_printf *tab);
 void		ft_print_unsigned(t_printf *tab);
+void		flags_check(t_printf *tab, const char *format, int index);
+int			ft_right_cs(t_printf *tab, const char *format, int index);
 // flags
 void		space_flag(t_printf *tab, int spicefier);
 void		plus_flag(t_printf *tab, int spicefier);
 void		shrap_flag(t_printf *tab, int spicefier);
+void		dash_flag(t_printf *tab, const char *format, int index);
 #endif

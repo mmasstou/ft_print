@@ -1,5 +1,5 @@
 printfTester
-a.*
+*.out
 *.a
 *.o
 */*.o

@@ -13,10 +13,11 @@ int main()
 	// printf("%d\n",m);
 
 
-	d = printf("%-+5.0d", 123);
+	d = printf("%-4c%-11c", 'c', 'd');
 	//printf("\nft_printf | %d ",n - 4);
 	printf("\n");
 	printf("%d\n",d);
 	printf("\n");
 	return (0);
 }
+

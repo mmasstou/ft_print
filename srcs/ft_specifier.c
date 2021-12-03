@@ -22,6 +22,8 @@ static int	update_index(t_printf *tab, int index)
 			index += tab->_rep->plus;
 		if (tab->_rep->shrap)
 			index += tab->_rep->shrap;
+		if (tab->_rep->dash)
+			index += tab->_rep->dash;
 		return (index);
 	}
 	else
@@ -37,14 +39,32 @@ static void	d_specifier(t_printf *tab, const char *format, int index)
 	else if (!tab->space && !tab->plus)
 		tab->tl += ft_putnbr(va_arg(tab->args, int));
 }
+static void	c_specifier(t_printf *tab, const char *format, int index)
+{
+	char	a;
 
+	if (!tab->dash && !tab->width)
+		ft_print_char(tab);
+	else if (!tab->dash && tab->width)
+	{
+		a = va_arg(tab->args, int);
+		ft_right_cs(tab, format, index);
+		tab->tl += write(1, &a, 1);
+		tab->width = 0;
+		tab->_rep->width = 0;
+	}
+	else
+		dash_flag(tab, format, index);
+		
+}
 void	ft_specifier(t_printf *tab, const char *format, int index)
 {
 	unsigned int	u;
 
 	update_index(tab, index);
+	flags_check(tab, format, index);
 	if (format[index] == 'c')
-		ft_print_char(tab);
+		c_specifier(tab, format, index);
 	else if (format[index] == 'd' || format[index] == 'i')
 		d_specifier(tab, format, index);
 	else if (format[index] == 's')
