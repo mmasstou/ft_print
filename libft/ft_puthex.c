@@ -12,19 +12,6 @@
 
 #include "../incs/ft_printf.h"
 
-static int	ft_hex_len(unsigned	int num)
-{
-	int	len;
-
-	len = 0;
-	while (num != 0)
-	{
-		len++;
-		num = num / 16;
-	}
-	return (len);
-}
-
 static	void	ft_put_hex_lower(unsigned int nbr)
 {
 	if (nbr >= 16)

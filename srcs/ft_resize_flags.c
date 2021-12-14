@@ -12,9 +12,8 @@
 
 #include "../incs/ft_printf.h"
 
-t_printf	*ft_initialise_tab(t_printf *tab)
+t_printf	*ft_resize_flags(t_printf *tab)
 {
-	tab->tl = 0;
 	tab->plus = 0;
 	tab->_rep->plus = 0;
 	tab->perc = 0;
@@ -37,6 +36,6 @@ t_printf	*ft_initialise_tab(t_printf *tab)
 	tab->precision = 0;
 	tab->_rep->precision = 0;
 	tab->_rep->lenprecision = 0;
-
 	return (tab);
 }
+

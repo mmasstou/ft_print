@@ -14,6 +14,6 @@
 
 int	is_specifier(int c)
 {
-	return (c == '%' || c == 'c' || c == 's' || c == 'p' || is_integer_specifier(c));
+	return (c == '%' || c == 'c' || c == 's'
+		|| c == 'p' || is_integer_specifier(c));
 }
-

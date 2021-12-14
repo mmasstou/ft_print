@@ -30,7 +30,5 @@ void	shrap_flag(t_printf *tab, int spicefier)
 			tab->tl += ft_puthex(x, spicefier);
 		}
 	}
-	tab->shrap = 0;
-	tab->_rep->shrap = 0;
-	tab->is_flag = 0;
+	ft_resize_flags(tab);
 }

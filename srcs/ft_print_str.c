@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
+#include <stdbool.h>
 
-void	ft_print_str(t_printf *tab)
+void	ft_print_str(t_printf *tab, char *str)
 {
-	char	*str;
+	char	*st;
 
-	str = va_arg(tab->args, char *);
-	if (str == NULL)
-		tab->tl += ft_putstr("(null)");
-	else
-		tab->tl += ft_putstr(str);
+	st = ft_substr(str, 0, ft_strlen(str));
+	tab->tl += ft_putstr(st);
+	free(st);
 }

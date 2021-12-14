@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags_check.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 03:05:45 by mmasstou          #+#    #+#             */
-/*   Updated: 2021/12/11 03:06:11 by mmasstou         ###   ########.fr       */
+/*   Created: 2021/12/11 03:33:34 by mmasstou          #+#    #+#             */
+/*   Updated: 2021/12/11 03:33:37 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-void	flags_check(t_printf *tab, const char *format, int index)
+char	*ft_strdup(const char *s)
 {
-	if (tab->zero && tab->dash)
-	{
-		tab->zero = 0;
-		tab->_rep->zero = 0;
-		tab->_rep->flags -= 1;
-	}
-	if (is_integer_specifier(format[index]))
-	{
-		if (tab->zero && tab->precision)
-		{
-			tab->zero = 0;
-			tab->_rep->zero = 0;
-			tab->_rep->flags -= 1;
-		}
-		if (tab->plus)
-		{
-			tab->space = 0;
-			tab->_rep->space = 0;
-			tab->_rep->flags -= 1;
-		}	
-	}	
+	char	*string;
+	char	*src;
+
+	string = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!string)
+		return (NULL);
+	src = (char *)s;
+	while (*src)
+		*string++ = *src++;
+	*string = 0;
+	return (string - ft_strlen(s));
 }

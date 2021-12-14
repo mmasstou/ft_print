@@ -12,7 +12,7 @@
 
 #include "../incs/ft_printf.h"
 
-static int	ft_hex_len(unsigned long long num)
+static int	ft_hex_len_ll(unsigned long long num)
 {
 	int	len;
 
@@ -45,7 +45,7 @@ static int	ft_putptr(unsigned long nbr)
 		else
 			ft_putchar((nbr - 10) + 'a');
 	}
-	jndex += ft_hex_len(index);
+	jndex += ft_hex_len_ll(index);
 	return (jndex);
 }
 

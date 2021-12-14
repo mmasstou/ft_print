@@ -6,7 +6,7 @@
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 09:56:40 by mmasstou          #+#    #+#             */
-/*   Updated: 2021/12/02 10:09:20 by mmasstou         ###   ########.fr       */
+/*   Updated: 2021/12/11 03:30:15 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(tab->args);
 	ret += tab->tl;
-	free (tab);
-	free (tab->_rep);
-	return (ret);
+	return (free (tab), free (tab->_rep), ret);
 }

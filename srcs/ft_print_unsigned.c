@@ -12,7 +12,7 @@
 
 #include "../incs/ft_printf.h"
 
-static int	ft_nbrlen(unsigned int n)
+static int	ft_Unbrlen(unsigned n)
 {
 	int	size;
 
@@ -31,12 +31,11 @@ static int	ft_nbrlen(unsigned int n)
 	}
 	return (size);
 }
-
 static int	ft_putunsigned(unsigned int nbr)
 {
 	int	index;
 
-	index = ft_nbrlen(nbr);
+	index = ft_Unbrlen(nbr);
 	if (nbr >= 10)
 		ft_putunsigned(nbr / 10);
 	ft_putchar(nbr % 10 + 48);
