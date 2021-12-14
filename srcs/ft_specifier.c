@@ -55,7 +55,12 @@ void	ft_specifier(t_printf *tab, const char *format, int index)
 	else if (format[index] == 's')
 		string_specifier(tab);
 	else if (format[index] == 'p')
-		ft_print_adress(tab);
+	{
+		if (tab->is_flag)
+			p_flag(tab, format, index);
+		else
+			ft_print_adress(tab);
+	}
 	else if (format[index] == 'u')
 		ft_print_unsigned(tab);
 	else if (format[index] == 'X' || format[index] == 'x')

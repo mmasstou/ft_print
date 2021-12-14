@@ -60,9 +60,12 @@ static int	flag_part2(t_printf *tab, const char *format, int index)
 	}	
 	if (format[index - 1] == '%' && format[index] == '0')
 	{
-		tab->zero = 1;
-		tab->_rep->zero++;
-		index++;
+		while (format[index] == '0')
+		{
+			tab->zero = 1;
+			tab->_rep->zero++;
+			index++;
+		}
 	}
 	if (format[index] == '.')
 	{

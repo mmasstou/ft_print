@@ -93,4 +93,6 @@ void		no_dash_pnt(t_printf *tab);
 // specifier
 int			string_specifier(t_printf *tab);
 int	x_flag(t_printf *tab, const char *format, int index);
+int	p_flag(t_printf *tab, const char *format, int index);
+
 #endif
