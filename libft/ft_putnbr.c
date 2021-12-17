@@ -12,21 +12,15 @@
 
 #include "../incs/ft_printf.h"
 
-int	ft_putnbr(int n)
+int	ft_putnbr(long long n)
 {
-	unsigned int	nbr;
 	int				index;
 
 	index = ft_nbrlen(n);
 	if (n < 0)
-	{
-		ft_putchar('-');
-		nbr = (unsigned int)(n * -1);
-	}
-	else
-		nbr = (unsigned int)n;
-	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10 + 48);
+		n = (n * -1);
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + 48);
 	return (index);
 }

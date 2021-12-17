@@ -1,6 +1,6 @@
 #include "../incs/ft_printf.h"
 
-int	ft_nbrlen(int n)
+int	ft_Unbrlen(unsigned n)
 {
 	int	size;
 
@@ -8,7 +8,10 @@ int	ft_nbrlen(int n)
 	if (n == 0)
 		return (1);
 	if (n <= 0)
+	{
 		n = -n;
+		size++;
+	}
 	while (n != 0)
 	{
 		n /= 10;

@@ -21,6 +21,12 @@ void	space_flag(t_printf *tab, int spicefier)
 		nbr = va_arg(tab->args, int);
 		if (nbr >= 0)
 			tab->tl += write(1, " ", 1);
+		else if (nbr < 0)
+		{
+			tab->tl += write(1, "-", 1);
+			nbr *= -1;
+		}
+
 		tab->tl += ft_putnbr(nbr);
 	}
 }
