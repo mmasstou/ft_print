@@ -99,6 +99,8 @@ int			hex_specifer(t_printf *tab, const char *format, int index);
 int			p_flag(t_printf *tab);
 int			d_zero_pnt(t_printf *tab);
 int			u_flags(t_printf *tab);
+// ** unsigned spicefier utils 
+
 // int			p_flag(t_printf *tab, const char *format, int index);
 
 #endif
