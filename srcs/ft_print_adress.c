@@ -58,9 +58,9 @@ void	ft_print_adress(t_printf *tab)
 	tab->tl += ft_putptr(p);
 }
 
-int	ft_p_Adress(unsigned long p)
+int	ft_p_adress(unsigned long p)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	index += ft_putstr("0x");

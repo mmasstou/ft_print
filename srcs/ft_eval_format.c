@@ -81,7 +81,7 @@ static int	flag_part2(t_printf *tab, const char *format, int index)
 static void	ft_update_flags(t_printf *tab)
 {
 	tab->is_flag = 1;
-	tab->_rep->flags = (tab->pnt + tab->dash + tab->zero );
+	tab->_rep->flags = (tab->pnt + tab->dash + tab->zero);
 	tab->_rep->flags += (tab->space + tab->shrap + tab->plus);
 }
 

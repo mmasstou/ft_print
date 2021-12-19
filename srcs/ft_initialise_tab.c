@@ -37,6 +37,5 @@ t_printf	*ft_initialise_tab(t_printf *tab)
 	tab->precision = 0;
 	tab->_rep->precision = 0;
 	tab->_rep->lenprecision = 0;
-
 	return (tab);
 }

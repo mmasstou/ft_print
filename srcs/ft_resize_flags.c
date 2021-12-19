@@ -38,4 +38,3 @@ t_printf	*ft_resize_flags(t_printf *tab)
 	tab->_rep->lenprecision = 0;
 	return (tab);
 }
-

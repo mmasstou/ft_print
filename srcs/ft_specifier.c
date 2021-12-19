@@ -12,7 +12,7 @@
 
 #include "../incs/ft_printf.h"
 
-static void	decimal_specifier(t_printf *tab, const char *format, int index)
+static int	decimal_specifier(t_printf *tab, const char *format, int index)
 {
 	int	nbr;
 	int	len;
@@ -263,14 +263,18 @@ static void	decimal_specifier(t_printf *tab, const char *format, int index)
 							tab->tl += write(1, "-", 1);
 							//len  += 1;
 						}
-						if (tab->_rep->precision > len)
+						if (tab->_rep->precision == 0 && nbr == 0)
+						{
+							return (1);
+						}
+						else if (tab->_rep->precision > len)
 						{
 							n = tab->_rep->precision - len;
 							while (n--)
 								tab->tl += write(1, "0", 1);
 							tab->tl += ft_putnbr(nbr);
 						}
-						else if (tab->_rep->precision <= len)
+						else if (tab->_rep->precision <= len )
 							tab->tl += ft_putnbr(nbr);
 					}
 				}
@@ -308,6 +312,7 @@ static void	decimal_specifier(t_printf *tab, const char *format, int index)
 		ft_resize_flags(tab);
 	}
 	ft_resize_flags(tab);
+	return (0);
 }
 
 static void	character_specifier(t_printf *tab, const char *format, int index)

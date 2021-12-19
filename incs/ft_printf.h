@@ -76,7 +76,7 @@ void		ft_print_char(t_printf *tab);
 void		ft_print_str(t_printf *tab, char *str);
 void		ft_print_adress(t_printf *tab);
 int			ft_putunsigned(unsigned int nbr);
-int			ft_p_Adress(unsigned long p);
+int			ft_p_adress(unsigned long p);
 void		ft_print_unsigned(t_printf *tab);
 void		flags_check(t_printf *tab, const char *format, int index);
 int			ft_putpercent(void);
@@ -100,7 +100,13 @@ int			p_flag(t_printf *tab);
 int			d_zero_pnt(t_printf *tab);
 int			u_flags(t_printf *tab);
 // ** unsigned spicefier utils 
-
+int			zero_pnt_precision_no_dashpw(t_printf *tab, unsigned int nbr,int len);
+int			precision_no_width(t_printf *tab, unsigned int nbr, int len);
+int			no_precision_a_w_a_no_w(t_printf *tab, unsigned int nbr, int len);
+int			no_dash_precision_width(t_printf *tab, unsigned int nbr, int len);
+int 		dash_precision(t_printf *tab, unsigned int nbr, int len);
+int			hex_pre(t_printf *tab, const char *format, int index, unsigned int u);
+int 		hex_dash_pnt(t_printf *t, const char *f, int x, unsigned int u);
 // int			p_flag(t_printf *tab, const char *format, int index);
 
 #endif

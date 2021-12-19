@@ -1,255 +1,55 @@
 #include "../incs/ft_printf.h"
 
+static int	hex_no_p_d(t_printf *t, const char *f, int x, unsigned int u)
+{
+	int	len;
+	int	m;
+
+	m = 0;
+	len = ft_hex_len(u);
+	if (!t->width)
+		t->tl += ft_puthex(u, f[x]);
+	else if (t->width)
+	{
+		if (t->_rep->width <= len)
+			m = 0;
+		else if (t->_rep->width > len)
+			m = t->_rep->width - len;
+		t->tl += ft_puthex(u, f[x]);
+		while (m--)
+			t->tl += write(1, " ", 1);
+	}
+	ft_resize_flags(t);
+	return (0);
+}
+
 static int	hex_pnt_dash(t_printf *tab, const char *format, int index)
 {
 	unsigned int	u;
 	int				len;
-	int				m;
-	int				n;
-	int				copy_p;
 
-	m = 0;
-	n = 0;
-	copy_p = 0;
 	u = va_arg(tab->args, unsigned int);
 	len = ft_hex_len(u);
-	
 	if (!tab->pnt && tab->dash)
+		hex_no_p_d(tab, format, index, u);
+	else if (tab->pnt && !tab->dash)
 	{
-		if (!tab->width)
+		if (!tab->precision && !tab->width)
 		{
-			tab->tl += ft_puthex(u, format[index]);
-			ft_resize_flags(tab);
-			return (1);
-		}
-		else if (tab->width)
-		{
-			if (tab->_rep->width <= len)
-				m = 0;
-			else if (tab->_rep->width > len)
-				m = tab->_rep->width - len;
-			tab->tl += ft_puthex(u, format[index]);
-			while (m--)
-				tab->tl += write(1, " ",1);
-			ft_resize_flags(tab);
-			return (1);
-		}
-	}
-	else if ((tab->pnt && !tab->dash))
-	{
-		if (!tab->precision)
-		{
-
-			if (!tab->width)
-			{
-				if (u == 0)
-				{
-					ft_resize_flags(tab);
-					return (1);
-				}
+			if (u != 0)
 				tab->tl += ft_puthex(u, format[index]);
-				ft_resize_flags(tab);
-				return (1);
-			}
-			else if (tab->width)
-			{
-				m = tab->_rep->width;
-				while (m--)
-					tab->tl += write(1, " ",1);
-				ft_resize_flags(tab);
-				return (1);
-			}
+		}
+		else if (!tab->precision && tab->width)
+		{
+			while (tab->_rep->width--)
+				tab->tl += write(1, " ", 1);
 		}
 		else if (tab->precision)
-		{
-			if (tab->_rep->precision == 0 && u == 0)
-			{
-				ft_resize_flags(tab);
-				return (1);
-			}
-			else if (tab->_rep->precision == 0 && u != 0)
-			{
-				tab->tl += ft_puthex(u, format[index]);
-				ft_resize_flags(tab);
-				return (1);
-			}
-			else if (!tab->width)
-			{
-				if (tab->_rep->precision > len)
-					m = tab->_rep->precision - len;
-				else if (tab->_rep->precision <= len)
-					m = 0;
-				while (m--)
-					tab->tl += write(1, "0",1);
-				tab->tl += ft_puthex(u, format[index]);
-				ft_resize_flags(tab);
-				return (1);
-			}
-			else if (tab->width || (tab->dash && tab->_rep->precision <= tab->_rep->width))
-			{
-				if (tab->_rep->precision > tab->_rep->width)
-				{
-					m = 0;
-					n = tab->_rep->precision - len;
-				}
-				else if (tab->_rep->precision < tab->_rep->width)
-				{
-					if (tab->_rep->precision > len)
-					{
-						n = tab->_rep->precision - len;
-						m = tab->_rep->width - n;
-					}
-					else if (tab->_rep->precision <= len)
-					{
-						n = 0;
-						m = tab->_rep->width - len;
-					}
-				}
-				else if (tab->_rep->precision == tab->_rep->width)
-				{
-					m = 0;
-					n = tab->_rep->precision - len;
-				}
-				while (m--)
-					tab->tl += write(1, " ",1);
-				while (n--)
-					tab->tl += write(1, "0",1);
-				tab->tl += ft_puthex(u, format[index]);
-				ft_resize_flags(tab);
-				return (1);
-			}
-		}
+			hex_pre(tab, format, index, u);
 	}
 	else if (tab->dash && tab->pnt)
-	{
-		if (!tab->precision)
-		{
-			if (!tab->width)
-			{
-				if (u != 0)
-				{
-					tab->tl += ft_puthex(u, format[index]);
-					ft_resize_flags(tab);
-					return (1);
-				}
-				ft_resize_flags(tab);
-				return (1);
-			}
-			else if (tab->width)
-			{
-				
-				if (tab->_rep->width <= len)
-				{
-					if (u == 0)
-					{
-						ft_resize_flags(tab);
-						return (1);
-					}
-					tab->tl += ft_puthex(u, format[index]);
-					ft_resize_flags(tab);
-					return (1);
-				}
-				else if (tab->_rep->width > len)
-				{
-					if (u == 0)
-					{
-						m = tab->_rep->width ;
-						while (m--)
-							tab->tl += write(1, " ",1);
-						ft_resize_flags(tab);
-						return (1);
-					}
-					else if (u != 0)
-					{
-						tab->tl += ft_puthex(u, format[index]);
-						m = tab->_rep->width - len ;
-						while (m--)
-							tab->tl += write(1, " ",1);
-						ft_resize_flags(tab);
-						return (1);
-					}
-				}
-			}
-		}
-		else if (tab->precision)
-		{
-			if (!tab->width)
-			{
-				if (tab->_rep->precision <= len)
-				{
-					tab->tl += ft_puthex(u, format[index]);
-					ft_resize_flags(tab);
-					return (1);
-				}
-				else if (tab->_rep->precision > len)
-				{
-					n = tab->_rep->precision - len;
-					while (n--)
-						tab->tl += write(1, "0",1);
-					tab->tl += ft_puthex(u, format[index]);
-					ft_resize_flags(tab);
-					return (1);
-				}
-			}
-			else if (tab->width)
-			{
-				if (tab->_rep->precision > tab->_rep->width)
-				{
-					if (tab->_rep->precision <= len)
-					{
-						tab->tl += ft_puthex(u, format[index]);
-						ft_resize_flags(tab);
-						return (1);	
-					}
-					m = tab->_rep->precision - len;
-					while (m--)
-						tab->tl += write(1, "0",1);
-					tab->tl += ft_puthex(u, format[index]);
-					ft_resize_flags(tab);
-					return (1);
-				}
-				else if (tab->_rep->precision <= tab->_rep->width)
-				{
-					if (tab->_rep->precision > len)
-					{
-						if (tab->_rep->width <= len)
-						{
-							copy_p = tab->_rep->precision;
-							n = copy_p -len;
-							m = 0;
-						}
-						else if (tab->_rep->width > len)
-						{
-							copy_p = tab->_rep->precision;
-							n = copy_p -len;
-							m = tab->_rep->width - tab->_rep->precision;
-						}
-					}
-					else if (tab->_rep->precision <= len)
-					{
-						if (tab->_rep->width <= len)
-						{
-							n = 0;
-							m = 0;
-						}
-						else if (tab->_rep->width > len)
-						{
-							n = 0;
-							m = tab->_rep->width - len;
-						}
-					}
-					while (n--)
-						tab->tl += write(1, "0",1);
-					tab->tl += ft_puthex(u, format[index]);
-					while (m--)
-						tab->tl += write(1, " ",1);
-					ft_resize_flags(tab);
-					return (1);
-				}
-			}
-		}
-	}
-	return(0);
+		hex_dash_pnt(tab, format, index, u);
+	return (ft_resize_flags(tab), 1);
 }
 
 static int	hex_pnt_zero(t_printf *tab, const char *format, int index)
@@ -480,7 +280,7 @@ static int	hex_pnt_zero(t_printf *tab, const char *format, int index)
 
 static int	hex_width(t_printf *tab, const char *format, int index)
 {
-	int 			len;
+	int				len;
 	unsigned int	u;
 	int				m;
 
@@ -492,7 +292,7 @@ static int	hex_width(t_printf *tab, const char *format, int index)
 	else if (tab->_rep->width > len)
 		m = tab->_rep->width - len;
 	while (m--)
-		tab->tl += write(1, " ",1);
+		tab->tl += write(1, " ", 1);
 	tab->tl += ft_puthex(u, format[index]);
 	ft_resize_flags(tab);
 	return (1);
@@ -514,7 +314,7 @@ int	hex_specifer(t_printf *tab, const char *format, int index)
 			shrap_flag(tab, format[index]);
 		else if (!tab->pnt && !tab->dash && !tab->zero && tab->width)
 			hex_width(tab, format, index);
-		else if ((tab->pnt || tab->dash) &&  !tab->zero)
+		else if ((tab->pnt || tab->dash) && !tab->zero)
 			hex_pnt_dash(tab, format, index);
 		else if ((tab->pnt || tab->zero) && !tab->dash)
 			hex_pnt_zero(tab, format, index);
