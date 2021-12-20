@@ -26,7 +26,6 @@ void	space_flag(t_printf *tab, int spicefier)
 			tab->tl += write(1, "-", 1);
 			nbr *= -1;
 		}
-
 		tab->tl += ft_putnbr(nbr);
 	}
 }

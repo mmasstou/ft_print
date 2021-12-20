@@ -107,6 +107,7 @@ int			no_dash_precision_width(t_printf *tab, unsigned int nbr, int len);
 int 		dash_precision(t_printf *tab, unsigned int nbr, int len);
 int			hex_pre(t_printf *tab, const char *format, int index, unsigned int u);
 int 		hex_dash_pnt(t_printf *t, const char *f, int x, unsigned int u);
+int			zf_pnt_pre_p_l_w(t_printf *tab, int nbr, int len);
 // int			p_flag(t_printf *tab, const char *format, int index);
 
 #endif

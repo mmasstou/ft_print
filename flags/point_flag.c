@@ -38,11 +38,39 @@ static void	point_flag_string(t_printf *tab, char *str, int len)
 	}
 }
 
+static void	d_point_flag(t_printf *tab, int nbrl, int len)
+{
+	if (tab->_rep->width && tab->_rep->precision > nbrl)
+	{
+		if (len < 0)
+		{
+			len *= -1;
+			tab->tl += write(1, "-", 1);
+			nbrl -= 1;
+		}
+		tab->_rep->precision -= nbrl;
+		while (tab->_rep->precision--)
+			tab->tl += write(1, "0", 1);
+	}
+	else if (!tab->_rep->width && tab->_rep->precision > nbrl)
+	{
+		if (len < 0)
+		{
+			len *= -1;
+			tab->tl += write(1, "-", 1);
+			nbrl -= 1;
+		}
+		tab->_rep->precision -= nbrl;
+		while (tab->_rep->precision--)
+			tab->tl += write(1, "0", 1);
+	}
+	tab->tl += ft_putnbr(len);
+}
+
 int	point_flag(t_printf *tab, const char *format, int index, char *str)
 {
 	int	len;
-	int m;
-	int nbrl;
+	int	nbrl;
 
 	len = 0;
 	nbrl = 0;
@@ -57,43 +85,9 @@ int	point_flag(t_printf *tab, const char *format, int index, char *str)
 	}
 	if (format[index] == 'd')
 	{
-		// no dash
 		len = va_arg(tab->args, int);
 		nbrl = ft_nbrlen(len);
-		if (tab->_rep->width)
-		{
-			if (tab->_rep->precision > nbrl)
-			{
-				if (len < 0)
-				{
-					len *= -1;
-					tab->tl += write(1, "-", 1);
-					nbrl -= 1;
-				}
-				m = tab->_rep->precision - nbrl;
-				while (m--)
-					tab->tl += write(1, "0",1);
-				tab->tl += ft_putnbr(len);
-			}
-			else 
-				tab->tl += ft_putnbr(len);
-		}
-		else if (!tab->_rep->width)
-		{
-			if (tab->_rep->precision > nbrl)
-			{
-				if (len < 0)
-				{
-					len *= -1;
-					tab->tl += write(1, "-", 1);
-					nbrl -= 1;
-				}
-				m = tab->_rep->precision - nbrl;
-				while (m--)
-					tab->tl += write(1, "0",1);
-				tab->tl += ft_putnbr(len);
-			}
-		}
+		d_point_flag(tab, nbrl, len);
 	}
 	return (1);
 }
