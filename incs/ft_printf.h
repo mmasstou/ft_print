@@ -111,6 +111,8 @@ int			zf_pnt_pre_p_l_w(t_printf *tab, int nbr, int len);
 void		h_no_p_z_u(t_printf *t, const char *f, int i, unsigned int u);
 void		h_p_no_z_u(t_printf *t, const char *f, int i, unsigned int u);
 void		h_p_z_u(t_printf *t, const char *f, int i, unsigned int u);
+void		d_spe_no_pnt(t_printf *tab, int nbr);
+void		d_spe_pnt(t_printf *tab, int nbr);
 // int			p_flag(t_printf *tab, const char *format, int index);
 
 #endif
