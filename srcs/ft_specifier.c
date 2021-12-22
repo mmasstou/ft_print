@@ -302,14 +302,12 @@ static int	decimal_specifier(t_printf *tab, const char *format, int index)
 			}
 		}
 	}
-
 	else
 	{
 		nbr = va_arg(tab->args, int);
 		if (nbr < 0)
 			tab->tl += write(1, "-", 1);
 		tab->tl += ft_putnbr(nbr);
-		ft_resize_flags(tab);
 	}
 	ft_resize_flags(tab);
 	return (0);
@@ -354,7 +352,7 @@ void	ft_specifier(t_printf *tab, const char *format, int index)
 	{
 		if (tab->is_flag)
 			u_flags(tab);
-		else 
+		else
 			ft_print_unsigned(tab);
 	}
 	else if (format[index] == 'X' || format[index] == 'x')

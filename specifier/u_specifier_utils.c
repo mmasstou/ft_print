@@ -51,7 +51,7 @@ static int	precision_l_width_a_len(t_printf *tab, unsigned int nbr, int len)
 	return (0);
 }
 
-int	zero_pnt_precision_no_dashpw(t_printf *tab, unsigned int nbr, int len)
+int	z_pnt_pr_no_d_pw(t_printf *tab, unsigned int nbr, int len)
 {
 	int	n;
 

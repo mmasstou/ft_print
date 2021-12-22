@@ -26,7 +26,7 @@ static int	zero_pnt_precision_no_dash(t_printf *tab, unsigned int nbr, int len)
 			tab->tl += ft_putunsigned(nbr);
 		}
 		else if (tab->_rep->precision <= tab->_rep->width)
-			zero_pnt_precision_no_dashpw(tab, nbr, len);
+			z_pnt_pr_no_d_pw(tab, nbr, len);
 	}
 	else if (tab->precision && !tab->width)
 		precision_no_width(tab, nbr, len);
@@ -119,7 +119,7 @@ int	u_flags(t_printf *tab)
 
 	m = 0;
 	nbr = va_arg(tab->args, unsigned int);
-	len = ft_Unbrlen(nbr);
+	len = ft_unbrlen(nbr);
 	if ((tab->zero || tab->pnt || tab->precision) && !tab->dash)
 	{
 		if (!tab->pnt)

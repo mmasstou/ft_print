@@ -41,7 +41,7 @@ static int	else_fun(t_printf *t, const char *f, int x, unsigned int u)
 	return (ft_resize_flags(t), 1);
 }
 
-int	hex_pre(t_printf *tab, const char *format, int index, unsigned int u)
+int	h_p(t_printf *tab, const char *format, int index, unsigned int u)
 {
 	int	len;
 	int	m;

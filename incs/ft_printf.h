@@ -59,7 +59,7 @@ int			ft_isspace(int s);
 int			ft_putstr(char *str);
 int			ft_putchar(int c);
 int			ft_putnbr(long long n);
-int			ft_Unbrlen(unsigned n);
+int			ft_unbrlen(unsigned int n);
 int			ft_puthex(unsigned int num, int specifier);
 int			ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
@@ -100,14 +100,17 @@ int			p_flag(t_printf *tab);
 int			d_zero_pnt(t_printf *tab);
 int			u_flags(t_printf *tab);
 // ** unsigned spicefier utils 
-int			zero_pnt_precision_no_dashpw(t_printf *tab, unsigned int nbr,int len);
+int			z_pnt_pr_no_d_pw(t_printf *tab, unsigned int nbr, int len);
 int			precision_no_width(t_printf *tab, unsigned int nbr, int len);
 int			no_precision_a_w_a_no_w(t_printf *tab, unsigned int nbr, int len);
 int			no_dash_precision_width(t_printf *tab, unsigned int nbr, int len);
-int 		dash_precision(t_printf *tab, unsigned int nbr, int len);
-int			hex_pre(t_printf *tab, const char *format, int index, unsigned int u);
-int 		hex_dash_pnt(t_printf *t, const char *f, int x, unsigned int u);
+int			dash_precision(t_printf *tab, unsigned int nbr, int len);
+int			h_p(t_printf *tab, const char *format, int index, unsigned int u);
+int			hex_dash_pnt(t_printf *t, const char *f, int x, unsigned int u);
 int			zf_pnt_pre_p_l_w(t_printf *tab, int nbr, int len);
+void		h_no_p_z_u(t_printf *t, const char *f, int i, unsigned int u);
+void		h_p_no_z_u(t_printf *t, const char *f, int i, unsigned int u);
+void		h_p_z_u(t_printf *t, const char *f, int i, unsigned int u);
 // int			p_flag(t_printf *tab, const char *format, int index);
 
 #endif

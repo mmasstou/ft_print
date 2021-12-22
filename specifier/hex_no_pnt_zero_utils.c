@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   hex_no_pnt_zero_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 11:54:36 by mmasstou          #+#    #+#             */
-/*   Updated: 2021/12/02 11:55:30 by mmasstou         ###   ########.fr       */
+/*   Created: 2021/12/22 18:16:30 by mmasstou          #+#    #+#             */
+/*   Updated: 2021/12/22 18:16:32 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-int	ft_putunsigned(unsigned int nbr)
+void	h_no_p_z_u(t_printf *t, const char *f, int i, unsigned int u)
 {
-	int	index;
+	int	len;
 
-	index = ft_unbrlen(nbr);
-	if (nbr >= 10)
-		ft_putunsigned(nbr / 10);
-	ft_putchar(nbr % 10 + 48);
-	return (index);
-}
-
-void	ft_print_unsigned(t_printf *tab)
-{
-	unsigned int	u;
-
-	u = va_arg(tab->args, unsigned int);
-	tab->tl += ft_putunsigned(u);
+	len = ft_hex_len(u);
+	if (!t->width)
+		t->tl += ft_puthex(u, f[i]);
+	else if (t->width)
+	{
+		if (t->_rep->width > len)
+		{
+			t->_rep->width -= len;
+			while (t->_rep->width--)
+				t->tl += write(1, "0", 1);
+		}
+		t->tl += ft_puthex(u, f[i]);
+	}
+	ft_resize_flags(t);
 }
